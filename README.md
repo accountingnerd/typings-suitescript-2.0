@@ -6,7 +6,7 @@
 
 ## Installation Instructions
 
-`npm install --save-dev @hitc/netsuite-types`
+`npm install --save-dev @hitc/netsuite-types` or `yarn --save-dev @hitc/netsuite-types`
 
 ## Usage
 
@@ -15,25 +15,25 @@ into your scripts.
 
 ### TSC (TypeScript Compiler) Configuration
 
-You can import the modules and use them like normal using standard TypeScript syntax. Just make sure your compiler is configured to use the amd module format and the es5 target. Create a file called `tsconfig.json` in your project root and have these options configured:
+You can import the modules and use them like normal using standard TypeScript syntax. Just make sure your compiler is configured to use the amd module format and the es2015 target. Create a file called `tsconfig.json` in your project root and have these options configured:
 
 ```json
 {
-  "compilerOptions": {
-    "module": "amd",
-    "target": "es5",
-    "moduleResolution":"node",
-    "sourceMap": false,
-    "newLine": "LF",
-    "experimentalDecorators": true,
-    "baseUrl": ".",
-    "lib": ["es5", "es2015.promise", "dom"],
-    "paths": {
-      "N": ["node_modules/@hitc/netsuite-types/N"],
-      "N/*": ["node_modules/@hitc/netsuite-types/N/*"]
-    }
-  },
-  "exclude": ["node_modules"]
+    "compilerOptions": {
+        "module": "amd",
+        "target": "es2015",
+        "moduleResolution": "node",
+        "sourceMap": false,
+        "newLine": "LF",
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "lib": ["es2015", "es2015.promise", "dom"],
+        "paths": {
+            "N": ["node_modules/@hitc/netsuite-types/N"],
+            "N/*": ["node_modules/@hitc/netsuite-types/N/*"]
+        }
+    },
+    "exclude": ["node_modules"]
 }
 ```
 
@@ -48,7 +48,7 @@ At the top of every script you will want to have the following lines added:
 
 ```typescript
 /**
- * @NAPIVersion 2.0
+ * @NAPIVersion 2.1
  * @NScriptType ClientScript
  */
 
@@ -58,10 +58,11 @@ import {EntryPoints} from 'N/types';
 `N/types` and `EntryPoints` isn't actually in the NetSuite API, but it is something that is included with this library to give you type definitons for your entry point functions. For example:
 
 ```typescript
-import {EntryPoints} from 'N/types';
-export let pageInit: EntryPoints.Client.pageInit = (context: EntryPoints.Client.pageInitContext) => {
-  //Your IDE will now autocomplete from the context argument. For instance use this to access context.mode and context.currentRecord in this pageInit example
-}
+import { EntryPoints } from 'N/types';
+export const pageInit: EntryPoints.Client.pageInit = (context) => {
+    //Your IDE will now autocomplete from the context argument. For instance use this to access context.mode
+    //and context.currentRecord in this pageInit example
+};
 ```
 
 Notice that we are exporting the function `pageInit` that will need to be referenced in the NetSuite Client Script record as an entry point. 
@@ -74,7 +75,7 @@ Full example for a User Event Script might look something like this:
 
 ```typescript
 /**
- * @NAPIVersion 2.0
+ * @NAPIVersion 2.1
  * @NScriptType UserEventScript
  */
 
@@ -91,7 +92,7 @@ export let beforeSubmit: EntryPoints.UserEvent.beforeSubmit = (context: EntryPoi
 
 ```typescript
 /**
- * @NApiVersion 2.x
+ * @NApiVersion 2.1
  * @NScriptType Suitelet
  */
 
@@ -111,5 +112,4 @@ This example exports the function `onRequest` that needs to be referenced in the
 
 You can download the latest published typings library at any time by simply running the command:
 
-`npm install --save-dev @hitc/netsuite-types`
-
+`npm install --save-dev @hitc/netsuite-types` or `yarn --save-dev @hitc/netsuite-types`

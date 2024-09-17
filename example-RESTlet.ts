@@ -1,10 +1,9 @@
 /**
- * @NAPIVersion 2.0
+ * @NAPIVersion 2.1
  * @NScriptType UserEventScript
  */
 
-import { EntryPoints } from 'N/types'
-import * as log from 'N/log'
+import { EntryPoints } from 'N/types';
 
 var del: EntryPoints.RESTlet.delete_ = requestParams => {
     let type = requestParams.type;
